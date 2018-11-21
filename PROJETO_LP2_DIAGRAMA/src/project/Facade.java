@@ -2,11 +2,13 @@ package project;
 
 import java.util.Map;
 
-public class Facade {
+public class facade {
 	
-	private Map<String, Usuario> mapa_de_usuarios;
+	private Map<String, usuario> mapa_de_usuarios;
+	private Map<String, Item> mapa_de_itens;
+	// US1
 	
-	public Facade() {
+	public facade() {
 	}
 	
 	public void lerReceptores(String caminho) {
@@ -25,4 +27,36 @@ public class Facade {
 		return "representacao";
 	}
 	
+	public String atualizaUsuario(String id, String nome, String email, String celular) {
+		return "representacao atualizada";
+	}
+	
+	public void removeUsuario(String id) {
+		
+	}
+	
+	// US2 
+	
+	public void adicionaDescritor(String descricao) {
+		
+	}
+	
+	public void adicionaItemParaDoacao(String id, String descricaoItem, int quantidade, String[] tags ) {
+		
+	}
+	
+	public void exibeItem(String id, String idDoador) {
+		
+	}
+	
+	public void atualizaItemParaDoacao(String id, String idDoador, int quantidade, String[] tags) {
+		
+	}
+	
+	public void removerItemParaDoacao(String id, String idDoador) {
+		
+	}
+	
+	
 }
+ 
