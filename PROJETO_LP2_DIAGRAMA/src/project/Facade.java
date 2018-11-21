@@ -2,11 +2,11 @@ package project;
 
 import java.util.Map;
 
-public class facade {
+public class Facade {
 	
-	private Map<String, usuario> mapa_de_usuarios;
+	private Map<String, Usuario> mapa_de_usuarios;
 	
-	public facade() {
+	public Facade() {
 	}
 	
 	public void lerReceptores(String caminho) {
