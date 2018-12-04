@@ -12,12 +12,19 @@ public class UsuarioController {
 								 "orgao_publico_estadual", "orgao_publico_federal", 
 								 "ong", "associacao", "sociedade" };
 	
+	/**
+	 * construtor que inicializa os atributos
+	 */
 	public UsuarioController() {
 		this.idItem = 0;
 		this.usuarios = new HashMap<>();
 		this.descritores = new TreeMap<>();
 	}
 	
+	/**
+	 * metodo que salva a ordem que os itens foram adicionados
+	 * @return a quantidade de itens cadastrados no sistema
+	 */
 	private int numOrdem() {
 		if (this.usuarios.isEmpty()) {
 			return 0;
@@ -27,6 +34,12 @@ public class UsuarioController {
 
 	// metodos para use case 1
 	
+	/**
+	 * metodo para testar se uma string esta contida em um array
+	 * @param cl a string a ser procurada
+	 * @param list o array a ser analizado
+	 * @return booleano que representa se esta ou nao contido
+	 */
 	private boolean in(String cl, String[] list) {
 		for (String s : list) {
 			if (cl.equals(s)) {
@@ -36,6 +49,14 @@ public class UsuarioController {
 		return false;
 	}
 
+	/**
+	 * metodo para adicionar um doador no sistema
+	 * @param id o cpf ou cnpj do doador
+	 * @param nome o nome do doador
+	 * @param email o email do doador
+	 * @param celular o numero de celular do doador
+	 * @param classe o tipo de doador
+	 */
 	public void adicionaDoador(String id, String nome, String email, String celular, String classe) {
 		if (id == null || id.trim().equals("")) {
 			throw new IllegalArgumentException("Entrada invalida: id do usuario nao pode ser vazio ou nulo.");
@@ -55,6 +76,11 @@ public class UsuarioController {
 		this.usuarios.put(id, new Usuario(id, nome, email, celular, classe, numOrdem(), "doador"));
 	}
 	
+	/**
+	 * metodo que retorna uma representacao do usuario usando o seu id
+	 * @param id o id do usuario
+	 * @return o usuario
+	 */
 	public String pesquisaUsuarioPorId(String id) {
 		if (id == null || id.trim().equals("")) {
 			throw new IllegalArgumentException("Entrada invalida: id do usuario nao pode ser vazio ou nulo.");
@@ -65,6 +91,11 @@ public class UsuarioController {
 
 	}
 
+	/**
+	 * metodo que retorna os usuarios com base no nome
+	 * @param nome o nome que se quer pesquisar
+	 * @return os usuarios com esse nome
+	 */
 	public String pesquisaUsuarioPorNome(String nome) {
 		if (nome == null || nome.trim().equals("")) {
 			throw new IllegalArgumentException("Entrada invalida: nome nao pode ser vazio ou nulo.");
@@ -96,6 +127,11 @@ public class UsuarioController {
 
 	// algoritmo para ler os arquivos csv
 
+	/**
+	 * metodo que cadastra os receptores a partir de um arquivo csv
+	 * @param caminho o caminho do arquivo csv no sistema
+	 * @throws IOException caso haja algum erro com o arquivo
+	 */
 	public void lerReceptores(String caminho) throws IOException {
 		Scanner sc = new Scanner(new File(caminho));
 
@@ -112,6 +148,16 @@ public class UsuarioController {
 		sc.close();
 	}
 
+	
+	/**
+	 * metodo que atualiza as informacoes de um usuario no sistema
+	 * caso nao queira mudar algum dos atrubutos basta deixar o campo vazio
+	 * @param id o id do usuario a ser atualizao
+	 * @param nome o novo nome 
+	 * @param email o novo email
+	 * @param celular o novo numero de celular 
+	 * @return a representacao atualizada do usuario
+	 */
 	public String atualizaUsuario(String id, String nome, String email, String celular) {
 		if (id == null || id.trim().equals("")) {
 			throw new IllegalArgumentException("Entrada invalida: id do usuario nao pode ser vazio ou nulo.");
@@ -127,6 +173,10 @@ public class UsuarioController {
 		return this.usuarios.get(id).toString();
 	}
 
+	/**
+	 * metodo que remove um usuario do sistema
+	 * @param id o id do usuario a ser removido
+	 */
 	public void removeUsuario(String id) {
 		if (id == null || id.trim().equals("")) {
 			throw new IllegalArgumentException("Entrada invalida: id do usuario nao pode ser vazio ou nulo.");

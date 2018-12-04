@@ -14,6 +14,17 @@ public class Usuario implements Comparable<Usuario> {
 	private int ordem;
 	private HashMap<Integer, Item> itens;
 	
+	
+	/**
+	 * construtor que inicializa os atributos
+	 * @param id o id do usuario
+	 * @param nome o nome do usuario
+	 * @param email o email do usuario
+	 * @param celular o celular do usuario
+	 * @param classe o tipo de usuario
+	 * @param ordem a ordem em que o usuario foi adicionado
+	 * @param status funcao do usuario
+	 */
 	public Usuario(String id, String nome, String email, String celular, String classe, int ordem, String status) {
 		this.celular = celular;
 		this.classe = classe;
