@@ -1,11 +1,20 @@
 package projetoLP2;
 
+import java.io.Serializable;
+import java.util.Arrays;
+
 /**
- * Representacao de um Item. Um Item deve possuir um identificador unico (Id), uma descricao,
+ * Representacao de um Item. Um Item deve possuir um identificador unico(Id), uma descricao,
  * uma quantidade e uma lista de tags que caracterizam o Item.
  *
  */
-public class Item implements Comparable<Item> {
+public class Item implements Comparable<Item>, Serializable {
+
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6214797384302662066L;
 
 	/**
 	 * O identificador unico do Item.
@@ -18,7 +27,7 @@ public class Item implements Comparable<Item> {
 	private String descricao;
 	
 	/**
-	 * A quantidade de um determinado item a ser doado;
+	 * A quantidade de um determinado item a ser doado.
 	 */
 	private int quantidade;
 	
@@ -26,20 +35,33 @@ public class Item implements Comparable<Item> {
 	 * A lista de tags que caracterizam o Item.
 	 */
 	private String[] tags;
+	
+	/**
+	 * Identificador do item que informa se ele e necessario por receptores ou disponivel para doacao.
+	 */
+	private String tipo;
+	
+	/**
+	 * Nivel de similaridade entre os itens.
+	 */
+	private int pontos;
 
 	/**
-     * Constroi o Item a partir da sua descricao, quantidade, lista de tags e id. 
+     * Constroi o Item a partir da sua descricao, quantidade, lista de tags, id e tipo. 
      * 
      * @param descricao A descricao do Item.
      * @param quantidade A quantidade de itens.
      * @param tags A lista de caracteristicas do Item.
      * @param id O identificador unico do Item.
+     * @param tipo O identificador do item quanto a ser necessario ou para doacao.
      */
-	public Item(String descricao, int quantidade, String[] tags, int id) {
+	public Item(String descricao, int quantidade, String[] tags, int id, String tipo) {
 		this.descricao = descricao;
 		this.quantidade = quantidade;
 		this.tags = tags;
 		this.id = id;
+		this.pontos = 0;
+		this.tipo = tipo;
 	}
 	
 	/**
@@ -50,6 +72,10 @@ public class Item implements Comparable<Item> {
 		return this.quantidade;
 	}
 	
+	/**
+	 * Metodo get para a lista de tags do Item.
+	 * @return A lista de tags do Item.
+	 */
 	public String[] getTags() {
 		return this.tags;
 	}
@@ -69,10 +95,18 @@ public class Item implements Comparable<Item> {
 	public void setTags(String[] novasTags) {
 		this.tags = novasTags;
 	}
+	
+	/**
+	 * Metodo set para atualizar os pontos que representam o nivel de similaridade entre os itens.
+	 * @param pontos Nivel de similaridade entre os itens. 
+	 */
+	public void setPontos(int pontos) {
+		this.pontos += pontos;
+	}
 
 	/**
 	 * Metodo get para o id do Item.
-	 * @return O identificador unico do Item;
+	 * @return O identificador unico do Item.
 	 */
 	public int getId() {
 		return this.id;
@@ -80,10 +114,26 @@ public class Item implements Comparable<Item> {
 	
 	/**
 	 * Metodo get para o descritor do Item;
-	 * @return O descritor do Item;
+	 * @return O descritor do Item.
 	 */
 	public String getDescritor() {
 		return this.descricao;
+	}
+	
+	/**
+	 * Metodo get para o tipo do Item.
+	 * @return O tipo do Item.
+	 */
+	public String getTipo() {
+		return this.tipo;
+	}
+	
+	/**
+	 * Metodo get para a quantidade de pontos.
+	 * @return a quantidade de pontos do Item.
+	 */
+	public int getPontos() {
+		return this.pontos;
 	}
 	
 
@@ -105,8 +155,57 @@ public class Item implements Comparable<Item> {
 		return this.id + " - " + this.descricao + ", tags: " + "[" + msg + "]" + ", quantidade: " + this.quantidade;
 	}
 
+	/**
+     * Retorna a informacao a respeito da comparacao
+     * entre dois itens, que sao comparados a partir
+     * de suas quantidades.
+     * 
+     * @return Informacao a respeito da comparacao dos Itens.
+     */
 	@Override
 	public int compareTo(Item item) {
 		return this.quantidade - item.getQuantidade();
 	}
+
+
+	/**
+	 *Gera um inteiro que representa hashCode de Item a partir de seu descritor e lista de tags.
+	 *
+	 * @return o inteiro representando o hashCode do Item.
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + Arrays.hashCode(tags);
+		return result;
+	}
+
+	/**
+	 * Metodo equals, que compara o objeto com outro a partir de seu número de seu descritor e lista de tags.
+	 * 
+	 * @param obj Objeto a ser comparado.
+	 * @return um valor booleano que indica se os objetos tem o mesmo descritor e lista de tags ou nao.
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (!Arrays.equals(tags, other.tags))
+			return false;
+		return true;
+	}
+	
+	
 }
