@@ -1,5 +1,14 @@
-# projeto_LP2
+# LP2Project-UFCG
 Equipe: Diego Ribeiro, Gabriel Carvalho, Lucas Abrantes, Raiany Rufino
+
+# eDoe.com
+
+Em uma vaquinha virtual conseguimos patrocínio para desenvolver o eDoe.com. A interface gráfica será uma doação de uma empresa parceira. Então, com o patrocínio da vaquinha virtual vamos pagar uma equipe de desenvolvimento (a sua) para desenvolver o backend do eDoe.com, um software para gerenciar doações em uma cidade ou região de uma cidade maior.
+
+Entendendo o eDoe.com: 
+Muitas pessoas tem interesse em fazer doações, mas as vezes não tem o tempo necessário para encontrar onde doar ou como doar. Como sabemos, vivemos em um país em que a desigualdade social ainda existe e por isso há várias pessoas necessitadas, às vezes grupos de pessoas com um problema em comum. Precisamos de um sistema para apoiar essa rede de doações: o eDoe.com.
+
+No eDoe.com usuários de toda a região envolvida podem cadastrar itens a serem doados. Usuários também podem cadastrar itens necessários e o sistema deve saber casar doações com necessidades para facilitar a doação. Uma vez fechada uma doação, o sistema ajuda a organizar o encontro de doador/receptor. 
 
 # Caso de uso 1: CRUD de usuários
 
@@ -18,23 +27,8 @@ Com base nessas informações, deve ser possível:
     Remover usuários do sistema localizados pelo seu documento de identificação;
     Cadastrar novos usuários receptores via leitura de arquivo;
     Atualizar receptores. O arquivo de receptores deve ser lido e os usuários atualizados para refletir a lista de receptores encontrada nesse arquivo. Nesse momento novos usuários podem ser cadastrados. Usuários repetidos não devem existir no sistema.
-
-A representação em String de um usuário é como segue:
-
-nome/documento, email, celular, status: {doador|receptor}
-
-Exemplos:
-
-Raquel Lopes/01234567899, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador
-
-Luciano Hulck/12345678900, ograndehulck@hulck.com,  (21) 9888-0021, status: doador
-
-Lar da garota/01234567000189, lardagarota@gmail.com, (83) 98762-4554, status: receptor
-
-Convento Ipuarana/12345678000190, ipuarana@hotmail.com, (83) 98777-9856, status: receptor
-
- Testes de aceitação disponíveis aqui.
-Caso de uso 2: CRUD de itens a serem doados
+    
+# Caso de uso 2: CRUD de itens a serem doados
 
 Usuários doadores podem inserir itens a serem doados. Para garantir que os itens a serem doados vão compartilhar a mesma descrição, é importante manter uma coleção de descritores de itens no sistema. Um descritor de item é apenas uma descrição genérica do item. O sistema mantém um conjunto de descritores de itens genéricos para doação, assim não podemos ter descrições repetidas. Por exemplo, um descritor de item pode ter a descrição "cadeira de rodas", outro descritor pode ser "curso de programação", ou "cobertor". Ao tentar inserir um item para doação o usuário deve primeiro verificar se um descritor de item que represente bem o item que ele tem para doar já está no conjunto de descritores de itens do sistema.
 
@@ -72,8 +66,7 @@ Se o usuário em questão já tiver um item para doação idêntico ao item que 
     Atualizar tags e quantidade de um item a ser doado por um usuário com um determinado documento. O item a ser atualizado é identificado pelo seu identificador único;
     Remover itens a serem doados de um usuário identificado pelo seu documento. O item é identificado pelo seu id único.
 
- Testes de aceitação disponíveis aqui.
-Caso de uso 3: pesquisa dos itens a serem doados
+# Caso de uso 3: pesquisa dos itens a serem doados
 
 Uma vez que o sistema já conhece os itens para serem doados, chegou a hora de escrever algumas funcionalidades interessantes.
 
@@ -97,8 +90,7 @@ Ex.:
 
 Implemente a parte da classe de fachada e o(s) controlador(es) necessário(s) para lidar com as classes/funcionalidades criadas neste caso de uso.
 
- Testes de aceitação disponíveis aqui.
-Caso de uso 4: cadastro, atualização, listagem e remoção de itens necessários
+# Caso de uso 4: cadastro, atualização, listagem e remoção de itens necessários
 
 Os usuários do sistema que são receptores devem poder indicar os itens que estão precisando receber, estamos chamando aqui de itens necessários. Um item necessário deve ter um identificador único e estar associado a um descritor de item, tags com características relacionadas ao item (por ordem de importância) e a quantidade necessária. Note que esses itens necessários trazem as mesmas informações que os itens para doação. Deve ser possível atualizar alguns campos de um item necessário (tags e quantidade). Dois itens necessários são iguais se eles tiverem o mesmo descritor genérico de item e as mesmas tags (na mesma ordem).
 
@@ -133,8 +125,7 @@ EXEMPLO dos parâmetros de entrada desse método: (idReceptor, descricaoItem, qu
     Atualizar tags e quantidade de um item necessário associado a um usuário com um determinado documento. O item a ser atualizado é identificado pelo identificador único do item;
     Remover itens a serem doados de um usuário identificado pelo seu documento. O item é identificado pelo seu id único.
 
-Testes de aceitação disponíveis aqui.
-Caso de uso 5: identificar possíveis matches  de itens para doação e itens necessários
+# Caso de uso 5: identificar possíveis matches  de itens para doação e itens necessários
 
 Esta é a funcionalidade mais importante deste sistema: encontrar casamentos (matches) entre itens a serem doados e itens necessários. Quem inicia esta funcionalidade é o receptor, e portanto o documento do usuário receptor deve ser conhecido pela função de matching. Além disso, deve ser informado o item necessário a ser considerado. A estratégia para realizar esse casamento considera  o descritor dos itens e as tags da seguinte forma: essa estratégia olha o descritor de item e as tags dos itens a serem doados para fazer o casamento com o item necessário. Apenas os itens para doação que tem o mesmo descritor que o item necessário especificado são selecionados e em seguida as tags são avaliadas. Os itens para doação que tem o mesmo descritor do item necessário iniciam o processo com 20 pontos. Tags iguais na mesma posição somam 10 pontos, tags iguais em posições diferentes somam 5 pontos. O sistema não é sensível a letras maiúsculas e minúsculas. Esta funcionalidade retorna os itens a serem doados que pontuarem nesse processo (zero ou mais itens podem ser retornados), ordenados da maior para a menor pontuação. Se as pontuações forem iguais deve-se ordenar pelo identificador dos itens.
 
@@ -142,8 +133,7 @@ O identificador dos itens selecionados devem também ser apresentados. Exemplo d
 
 67 - cobertor, tags: [la, solteiro], quantidade: 13, doador: Raquel Lopes/01234567899  |  22 - cobertor, tags: [la], quantidade: 4, doador: Lívia Sampaio/23456789011 |  45 - cobertor, tags: [casal], quantidade: 3, doador: Eliane Araújo/34567890122
 
- Testes de aceitação disponíveis aqui.
-Caso de uso 6: realizar doações e manter o histórico de doações
+# Caso de uso 6: realizar doações e manter o histórico de doações
 
 Conhecendo os possíveis casamentos entre itens necessários e para doação, um usuário receptor pode solicitar uma doação. Para isso, o usuário deve indicar o identificador do item necessário e do item a ser doado. O sistema deve validar o pedido de doação olhando se os descritores de itens são mesmo iguais.  Caso o pedido seja validado, o sistema deve atualizar a quantidade de itens a serem doados e de itens necessários dos itens envolvidos nesta doação. Se uma dessas quantidades cair para zero, o item específico (para doação ou necessário) deve ser removido do sistema. O descritor do item, no entanto não deve ser removido do sistema.
 
